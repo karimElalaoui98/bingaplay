@@ -95,8 +95,14 @@ body {
 
 /* Add these new styles */
 .nav-scrolled {
-  background-color: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  /* From https://css.glass */
+  /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.48);
+  /* border-radius: 16px; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.7px);
+  -webkit-backdrop-filter: blur(11.7px);
+  border: 1px solid rgba(0, 0, 0, 0.17);
 }
 
 .timeline-line {
