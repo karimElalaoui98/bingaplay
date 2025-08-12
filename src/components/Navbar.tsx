@@ -12,11 +12,13 @@ export default function Navbar() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: { y: element, offsetY: 100 },
-        ease: "power2.inOut",
-      });
+      const lenis = (window as any).lenis;
+      if (lenis) {
+        lenis.scrollTo(element, {
+          offset: -100,
+          duration: 1.2,
+        });
+      }
     }
   };
 

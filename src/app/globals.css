@@ -22,7 +22,7 @@ html {
 .custom-cursor {
   width: 32px;
   height: 32px;
-  background: rgba(255, 255, 255, 1);
+  background: rgba(92, 92, 92, 0.6);
   backdrop-filter: blur(4px);
   border-radius: 50%;
   position: fixed;
@@ -57,4 +57,17 @@ body {
   left: 0;
   width: 100%;
   overflow: hidden;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important; /* prevents native smooth from fighting Lenis */
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+body {
+  overscroll-behavior: none;
 }

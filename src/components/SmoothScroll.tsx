@@ -1,38 +1,50 @@
 "use client";
-import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
+import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
-export default function SmoothScroll({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2, // Reduced from 2
-      easing: (t) => t, // Linear easing for more natural feel
+    lenisRef.current = new Lenis({
+      // Duration controls the speed of the smooth scroll
+      // Increase for slower scrolling, decrease for faster
+      // Try values between 1.2 - 2.4
+      duration: 2.2,
+
+      // Easing function affects the scroll animation curve
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+
+      orientation: "vertical",
+      gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.8, // Reduced multiplier for more control
-      smoothTouch: false,
-      touchMultiplier: 2,
+
+      // Adjust touchMultiplier to control mobile touch scroll speed
+      // Increase for faster touch scrolling, decrease for slower
+      // Try values between 1 - 3
+      touchMultiplier: 1.5,
+
+      // Optional: Add wheelMultiplier to control mouse wheel speed
+      // Increase for faster wheel scrolling, decrease for slower
+      // Try values between 0.5 - 1.5
+      wheelMultiplier: 0.8,
     });
 
-    // Integrate Lenis with GSAP
-    lenis.on("scroll", () => {
-      gsap.ScrollTrigger.update();
-    });
-
+    // GSAP ticker integration
+    // The time multiplier (1000) affects the overall smoothness
+    // Increase for smoother but slower scrolling
+    // Decrease for faster but potentially less smooth scrolling
     gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
+      lenisRef.current?.raf(time * 1000);
     });
 
-    // Clean up
     return () => {
-      lenis.destroy();
-      gsap.ticker.remove(() => {});
+      lenisRef.current?.destroy();
     };
   }, []);
 
-  return <>{children}</>;
+  return <div>{children}</div>;
 }
+
+export default SmoothScroll;
