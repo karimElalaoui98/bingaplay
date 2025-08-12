@@ -1,16 +1,12 @@
-import Benefits from "@/components/Benefits";
 import HeroMonolith from "@/components/HeroMonolith";
-import Recharge from "@/components/Recharge";
-import Trending from "@/components/Trending";
+import TrendingMinimal from "@/components/TrendingMinimal";
 
 export default function Page() {
   return (
     <main>
       {/* <Hero /> */}
       <HeroMonolith />
-      <Benefits />
-      <Trending />
-      <Recharge />
+      <TrendingMinimal />
     </main>
   );
 }

@@ -14,10 +14,6 @@ export default function Navbar() {
     if (element) {
       const lenis = (window as any).lenis;
       if (lenis) {
-        lenis.scrollTo(element, {
-          offset: -100,
-          duration: 1.2,
-        });
       }
     }
   };

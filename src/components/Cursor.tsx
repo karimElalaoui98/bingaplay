@@ -5,11 +5,13 @@ import { gsap } from "@/lib/gsap";
 
 export default function Cursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!cursorRef.current) return;
+    if (!cursorRef.current || !textRef.current) return;
 
     const cursor = cursorRef.current;
+    const cursorText = textRef.current;
 
     const onMouseMove = (e: MouseEvent) => {
       gsap.to(cursor, {
@@ -34,6 +36,16 @@ export default function Cursor() {
       });
     };
 
+    const onCardHover = () => {
+      cursor.classList.add("cursor-card-hover");
+      cursorText.style.opacity = "1";
+    };
+
+    const onCardLeave = () => {
+      cursor.classList.remove("cursor-card-hover");
+      cursorText.style.opacity = "0";
+    };
+
     const onLinkHover = () => {
       cursor.classList.add("cursor-hover");
     };
@@ -47,7 +59,14 @@ export default function Cursor() {
     document.addEventListener("mouseenter", onMouseEnter);
     document.addEventListener("mouseleave", onMouseLeave);
 
-    // Add hover effect for all interactive elements
+    // Add hover effect for cards
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      card.addEventListener("mouseenter", onCardHover);
+      card.addEventListener("mouseleave", onCardLeave);
+    });
+
+    // Add hover effect for other interactive elements
     const interactiveElements = document.querySelectorAll(
       "a, button, .interactive"
     );
@@ -60,6 +79,10 @@ export default function Cursor() {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseenter", onMouseEnter);
       document.removeEventListener("mouseleave", onMouseLeave);
+      cards.forEach((card) => {
+        card.removeEventListener("mouseenter", onCardHover);
+        card.removeEventListener("mouseleave", onCardLeave);
+      });
       interactiveElements.forEach((el) => {
         el.removeEventListener("mouseenter", onLinkHover);
         el.removeEventListener("mouseleave", onLinkLeave);
@@ -67,5 +90,11 @@ export default function Cursor() {
     };
   }, []);
 
-  return <div ref={cursorRef} className="custom-cursor" />;
+  return (
+    <div ref={cursorRef} className="custom-cursor">
+      <div ref={textRef} className="cursor-text">
+        View
+      </div>
+    </div>
+  );
 }

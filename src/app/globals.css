@@ -22,19 +22,35 @@ html {
 .custom-cursor {
   width: 32px;
   height: 32px;
-  background: rgba(92, 92, 92, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(92, 92, 92, 1);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 9999;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   mix-blend-mode: difference;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.3s, height 0.3s;
+}
+
+.cursor-text {
+  color: black;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .cursor-hover {
-  transform: scale(1.5);
-  background: rgba(255, 255, 255, 0.3);
+  transform: scale(4.5);
+}
+
+.cursor-card-hover {
+  width: 100px;
+  height: 100px;
+  mix-blend-mode: normal;
+  background: rgba(255, 255, 255, 1);
 }
 
 body {
