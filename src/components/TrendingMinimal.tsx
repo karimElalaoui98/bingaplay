@@ -14,19 +14,19 @@ const ITEMS: Item[] = [
     name: "PlayStation Network",
     blurb: "Recharger votre portefeuille PSN",
     price: "110,00 MAD – 1100,00 MAD",
-    img: "/test.png",
+    img: "https://dl.dropboxusercontent.com/s/0r24u19817p9bt3/Logo.png?dl=0",
   },
   {
     name: "Xbox / Game Pass",
     blurb: "Accédez à des centaines de jeux",
     price: "90,00 MAD – 1000,00 MAD",
-    img: "/test.png",
+    img: "https://dl.dropboxusercontent.com/s/0r24u19817p9bt3/Logo.png?dl=0",
   },
   {
     name: "Steam Wallet",
     blurb: "Achetez jeux, DLC et objets",
     price: "50,00 MAD – 1000,00 MAD",
-    img: "/test.png",
+    img: "https://dl.dropboxusercontent.com/s/0r24u19817p9bt3/Logo.png?dl=0",
   },
 ];
 

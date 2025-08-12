@@ -51,6 +51,7 @@ html {
   height: 100px;
   mix-blend-mode: normal;
   background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -74,16 +75,40 @@ body {
   width: 100%;
   overflow: hidden;
 }
+
 html.lenis,
 html.lenis body {
   height: auto;
 }
+
 .lenis.lenis-smooth {
   scroll-behavior: auto !important; /* prevents native smooth from fighting Lenis */
 }
+
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
+
 body {
   overscroll-behavior: none;
+}
+
+/* Add these new styles */
+.nav-scrolled {
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.timeline-line {
+  stroke-linecap: round;
+  will-change: stroke-dashoffset;
+}
+
+.timeline-dot {
+  transform-origin: center;
+  will-change: transform;
+}
+
+.cards-container {
+  will-change: transform;
 }

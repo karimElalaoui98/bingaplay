@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
@@ -22,6 +22,20 @@ export default function Navbar() {
     if (!navRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Add scroll trigger for navbar background
+      ScrollTrigger.create({
+        start: "top+=800 top",
+        onUpdate: (self) => {
+          if (navRef.current) {
+            if (self.progress > 0) {
+              navRef.current.classList.add("nav-scrolled");
+            } else {
+              navRef.current.classList.remove("nav-scrolled");
+            }
+          }
+        },
+      });
+
       // Animate nav items on mount
       gsap.from(".nav-item", {
         y: -20,
@@ -55,7 +69,10 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div ref={navRef} className="fixed z-20 py-4 w-full">
+    <div
+      ref={navRef}
+      className="fixed z-20 py-4 w-full transition-colors duration-300"
+    >
       <div className="mx-auto flex h-10 max-w-6xl items-center justify-between px-4 text-white">
         <div className="text-sm tracking-widest font-semibold">BINGAPLAY</div>
         <nav className="hidden gap-8 text-sm opacity-90 md:flex">
